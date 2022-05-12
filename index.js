@@ -21,7 +21,7 @@ async function loadApp()
             console.log("Middleware is called");
             next();
         })
-        
+        app.use("/user",userRoutes);
         app.use((req,res,next)=>{
             const token=req.headers["auth-token"];
             if(token){
@@ -40,7 +40,6 @@ async function loadApp()
                 res.sendStatus(401);
             }
         })
-        app.use("/user",userRoutes);
         app.use("/events",eventsRoutes);
         app.listen(process.env.PORT,()=>console.log(`Server Started @ PORT ${process.env.PORT}`));
     }
